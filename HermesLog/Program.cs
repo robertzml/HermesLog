@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Text;
+using System.Text.Json;
+using System.Text.Unicode;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
 namespace HermesLog
 {
+    using HermesLog.Model;
+    using System.Text.Encodings.Web;
+
     class Program
     {
         static void Main(string[] args)
@@ -29,7 +34,15 @@ namespace HermesLog
                         var body = ea.Body.ToArray();
                         var message = Encoding.UTF8.GetString(body);
 
-                        Console.WriteLine(" [x] Received {0}", message);
+                        var serializeOptions = new JsonSerializerOptions
+                        {
+                            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                        };
+
+                        var msg = JsonSerializer.Deserialize<LogMessage>(message, serializeOptions);
+
+                        Console.WriteLine(" [x] Received {0}, Level is: {1}", message, msg.Level);
                     };
 
                     channel.BasicConsume(queue: "LogQueue", autoAck: true, consumer: consumer);

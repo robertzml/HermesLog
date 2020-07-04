@@ -1,0 +1,12 @@
+﻿version: "3.7"
+services:
+  hermes-log:
+    build:
+      context: .
+    image: hermes-log
+    container_name: hermes-log-1
+    networks:
+      hermes-net:
+networks:
+  hermes-net:
+    name: hermes-network
