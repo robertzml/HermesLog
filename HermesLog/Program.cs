@@ -48,9 +48,11 @@ namespace HermesLog
                     channel.BasicConsume(queue: "LogQueue", autoAck: true, consumer: consumer);
 
                     Console.WriteLine(" Press [enter] to exit.");
-                    Console.ReadLine();
+                    Console.ReadLine();                   
                 }
             }
+
+            Console.WriteLine("Application exit.");
         }     
     }
 }

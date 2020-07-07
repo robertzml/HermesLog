@@ -5,6 +5,8 @@ services:
       context: .
     image: hermes-log
     container_name: hermes-log-1
+    stdin_open: true
+    tty: true
     networks:
       hermes-net:
 networks:
