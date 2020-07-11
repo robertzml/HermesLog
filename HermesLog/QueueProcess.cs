@@ -7,6 +7,7 @@ using System.Text.Unicode;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using HermesLog.Model;
+using HermesLog.DL;
 
 namespace HermesLog
 {
@@ -15,6 +16,9 @@ namespace HermesLog
     /// </summary>
     public class QueueProcess
     {
+        /// <summary>
+        /// 启动队列监听
+        /// </summary>
         public void Run()
         {
             IConnectionFactory factory = new ConnectionFactory()
@@ -25,6 +29,8 @@ namespace HermesLog
                 Password = "admin"
             };
 
+            LogMessageBusiness logMessageBusiness = new LogMessageBusiness();
+
             using (var connection = factory.CreateConnection())
             {
                 using (IModel channel = connection.CreateModel())
@@ -34,20 +40,18 @@ namespace HermesLog
                     var consumer = new EventingBasicConsumer(channel);
                     consumer.Received += (sender, ea) =>
                     {
+                        // get text
                         var body = ea.Body.ToArray();
                         var message = Encoding.UTF8.GetString(body);
 
-                        var serializeOptions = new JsonSerializerOptions
-                        {
-                            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
-                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                        };
+                        // insert log entity
+                        var log = logMessageBusiness.Deserialize(message);
+                        logMessageBusiness.SetTime(log);
+                        logMessageBusiness.Insert(log);
 
-                        var msg = JsonSerializer.Deserialize<LogMessage>(message, serializeOptions);
-
-                        Console.WriteLine(" [x] Received {0}, Level is: {1}", message, msg.Level);
+                        Console.WriteLine(log.ToString());
                     };
-
+                    
                     channel.BasicConsume(queue: "LogQueue", autoAck: true, consumer: consumer);
 
                     Console.WriteLine(" Press [enter] to exit.");

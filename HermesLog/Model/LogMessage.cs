@@ -11,10 +11,16 @@ namespace HermesLog.Model
     [SugarTable(tableName: "log")]
     public class LogMessage
     {
+        #region Field
         /// <summary>
         /// 日志级别常量
         /// </summary>
         private readonly string[] levels = { "Exception", "Error", "Warning", "Info", "Debug", "Verbose" };
+        #endregion //Field
+
+        #region Property
+        [SugarColumn(ColumnName = "id", IsPrimaryKey = true)]
+        public string Id { get; set; }
 
         /// <summary>
         /// 日志级别
@@ -44,6 +50,14 @@ namespace HermesLog.Model
         /// 日志时间
         /// </summary>
         [SugarColumn(ColumnName = "timestamp")]
-        public long Timestamp { get; set; }
+        public DateTime Timestamp { get; set; }
+        #endregion //Property
+
+        #region Override
+        public override string ToString()
+        {
+            return string.Format("[{0}][{1}]-[{2}][{3}]-[{4}]", this.Timestamp, this.levels[this.Level], this.Module, this.Action, this.Message);
+        }
+        #endregion //Override
     }
 }
