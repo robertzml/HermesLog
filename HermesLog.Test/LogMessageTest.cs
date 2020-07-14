@@ -41,5 +41,20 @@ namespace HermesLog.Test
 
             Assert.Pass();
         }
+
+        /// <summary>
+        /// ≤‚ ‘∑¥–Ú¡–ªØ
+        /// </summary>
+        [Test]
+        public void TestDeserialize()
+        {
+            string json = "{\"level\":5,\"module\":\"hermes-account\",\"action\":\"find user\",\"message\":\"find user by 15995202790\"}";
+
+            var logMessage = logMessageBusiness.Deserialize(json);
+            logMessageBusiness.SetTime(logMessage);
+            Console.WriteLine(logMessage.ToString());
+
+            Assert.AreEqual(5, logMessage.Level);
+        }
     }
 }
