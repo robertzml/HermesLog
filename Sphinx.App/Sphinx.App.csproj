@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sphinx.Base\Sphinx.Base.csproj" />
     <ProjectReference Include="..\Sphinx.Core\Sphinx.Core.csproj" />
   </ItemGroup>
 

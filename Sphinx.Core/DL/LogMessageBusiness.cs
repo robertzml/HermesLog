@@ -4,11 +4,13 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using Sphinx.Core.Entity;
 using SqlSugar;
 
 namespace Sphinx.Core.DL
 {
+    using Sphinx.Base.Common;
+    using Sphinx.Core.Entity;
+
     /// <summary>
     /// 日志业务类
     /// </summary>
@@ -19,7 +21,7 @@ namespace Sphinx.Core.DL
         {
             SqlSugarClient db = new SqlSugarClient(new ConnectionConfig()
             {
-                ConnectionString = "Server=192.168.1.121;Database=hermes-log;User=root;Password=123456",
+                ConnectionString = AppSettings.MySqlConnection,
                 DbType = DbType.MySql,
                 IsAutoCloseConnection = true,
                 InitKeyType = InitKeyType.Attribute
@@ -55,6 +57,22 @@ namespace Sphinx.Core.DL
         {
             log.Id = Guid.NewGuid().ToString();
             log.Timestamp = DateTime.Now;
+        }
+
+        /// <summary>
+        /// 序列化对象
+        /// </summary>
+        /// <param name="log"></param>
+        /// <returns></returns>
+        public string Serialize(LogMessage log)
+        {
+            var serializeOptions = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+
+            return JsonSerializer.Serialize<LogMessage>(log, serializeOptions);
         }
 
         /// <summary>

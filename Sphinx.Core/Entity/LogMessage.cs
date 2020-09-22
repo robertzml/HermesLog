@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using SqlSugar;
 
 namespace Sphinx.Core.Entity
@@ -19,6 +21,7 @@ namespace Sphinx.Core.Entity
         #endregion //Field
 
         #region Property
+        [JsonIgnore]
         [SugarColumn(ColumnName = "id", IsPrimaryKey = true)]
         public string Id { get; set; }
 
