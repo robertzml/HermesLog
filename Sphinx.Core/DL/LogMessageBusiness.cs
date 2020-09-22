@@ -4,10 +4,10 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using Sphinx.Model;
+using Sphinx.Core.Entity;
 using SqlSugar;
 
-namespace Sphinx.DL
+namespace Sphinx.Core.DL
 {
     /// <summary>
     /// 日志业务类

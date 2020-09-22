@@ -2,8 +2,8 @@ using NUnit.Framework;
 
 namespace HermesLog.Test
 {
-    using HermesLog.DL;
-    using HermesLog.Model;
+    using Sphinx.Core.DL;
+    using Sphinx.Core.Entity;
     using System;
 
     /// <summary>
@@ -28,9 +28,10 @@ namespace HermesLog.Test
             LogMessage logMessage = new LogMessage
             {
                 Level = 1,
-                Module = "hermes-log",
-                Action = "test",
-                Message = "test insert 2"
+                System = "sphinx-log",
+                Module = "test",
+                Action = "test insert",
+                Message = "insert message"
             };
 
             logMessageBusiness.SetTime(logMessage);

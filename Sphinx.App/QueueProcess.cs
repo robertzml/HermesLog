@@ -6,11 +6,12 @@ using System.Text.Json;
 using System.Text.Unicode;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using Sphinx.Model;
-using Sphinx.DL;
 
 namespace Sphinx.App
 {
+    using Sphinx.Core.DL;
+    using Sphinx.Core.Entity;
+
     /// <summary>
     /// 队列处理类
     /// </summary>
