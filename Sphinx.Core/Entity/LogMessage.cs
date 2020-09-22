@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using SqlSugar;
 
-namespace HermesLog.Model
+namespace Sphinx.Core.Entity
 {
     /// <summary>
     /// 日志消息类
@@ -27,6 +27,12 @@ namespace HermesLog.Model
         /// </summary>
         [SugarColumn(ColumnName = "level")]
         public int Level { get; set; }
+
+        /// <summary>
+        /// 所属系统
+        /// </summary>
+        [SugarColumn(ColumnName = "system")]
+        public string System { get; set; }
 
         /// <summary>
         /// 所属模块
@@ -56,7 +62,7 @@ namespace HermesLog.Model
         #region Override
         public override string ToString()
         {
-            return string.Format("[{0}][{1}]-[{2}][{3}]-[{4}]", this.Timestamp, this.levels[this.Level], this.Module, this.Action, this.Message);
+            return string.Format("[{0}][{1}]-[s:{2}][m:{3}][a:{4}]-[{5}]", this.Timestamp, this.levels[this.Level], this.System, this.Module, this.Action, this.Message);
         }
         #endregion //Override
     }

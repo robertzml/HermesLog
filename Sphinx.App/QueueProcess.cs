@@ -6,10 +6,10 @@ using System.Text.Json;
 using System.Text.Unicode;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using HermesLog.Model;
-using HermesLog.DL;
+using Sphinx.Model;
+using Sphinx.DL;
 
-namespace HermesLog
+namespace Sphinx.App
 {
     /// <summary>
     /// 队列处理类

@@ -4,10 +4,10 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using HermesLog.Model;
+using Sphinx.Model;
 using SqlSugar;
 
-namespace HermesLog.DL
+namespace Sphinx.DL
 {
     /// <summary>
     /// 日志业务类
