@@ -33,33 +33,6 @@ namespace Sphinx.Core.DL
 
         #region Method
         /// <summary>
-        /// 反序列化日志对象
-        /// </summary>
-        /// <param name="msg">日志json字符串</param>
-        /// <returns></returns>
-        public LogMessage Deserialize(string msg)
-        {
-            var serializeOptions = new JsonSerializerOptions
-            {
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
-
-            var log = JsonSerializer.Deserialize<LogMessage>(msg, serializeOptions);
-            return log;
-        }
-
-        /// <summary>
-        /// 设置日志对象ID和时间
-        /// </summary>
-        /// <param name="log"></param>
-        public void SetTime(LogMessage log)
-        {
-            log.Id = Guid.NewGuid().ToString();
-            log.Timestamp = DateTime.Now;
-        }
-
-        /// <summary>
         /// 序列化对象
         /// </summary>
         /// <param name="log"></param>

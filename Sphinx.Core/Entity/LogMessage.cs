@@ -17,7 +17,7 @@ namespace Sphinx.Core.Entity
         /// <summary>
         /// 日志级别常量
         /// </summary>
-        private readonly string[] levels = { "Exception", "Error", "Warning", "Info", "Debug", "Verbose" };
+        private static readonly string[] levels = { "Exception", "Error", "Warning", "Info", "Debug", "Verbose" };
         #endregion //Field
 
         #region Property
@@ -65,7 +65,8 @@ namespace Sphinx.Core.Entity
         #region Override
         public override string ToString()
         {
-            return string.Format("[{0}][{1}]-[s:{2}][m:{3}][a:{4}]-[{5}]", this.Timestamp, this.levels[this.Level], this.System, this.Module, this.Action, this.Message);
+            return string.Format("[{0:yyyy-MM-dd HH:mm:ss.fff}][{1}]-[s:{2}][m:{3}][a:{4}]-[{5}]", 
+                this.Timestamp, LogMessage.levels[this.Level], this.System, this.Module, this.Action, this.Message);
         }
         #endregion //Override
     }

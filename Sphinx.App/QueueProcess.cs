@@ -46,11 +46,11 @@ namespace Sphinx.App
                         var message = Encoding.UTF8.GetString(body);
 
                         // insert log entity
-                        var log = logMessageBusiness.Deserialize(message);
-                        logMessageBusiness.SetTime(log);
-                        logMessageBusiness.Insert(log);
+                        //var log = logMessageBusiness.Deserialize(message);
+                        //logMessageBusiness.SetTime(log);
+                        //logMessageBusiness.Insert(log);
 
-                        Console.WriteLine(log.ToString());
+                        //Console.WriteLine(log.ToString());
                     };
                     
                     channel.BasicConsume(queue: "LogQueue", autoAck: true, consumer: consumer);

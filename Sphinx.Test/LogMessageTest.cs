@@ -3,6 +3,7 @@ using NUnit.Framework;
 namespace HermesLog.Test
 {
     using Sphinx.Base.Common;
+    using Sphinx.Core.Builder;
     using Sphinx.Core.DL;
     using Sphinx.Core.Entity;
     using System;
@@ -37,29 +38,15 @@ namespace HermesLog.Test
                 Message = "insert message"
             };
 
-            logMessageBusiness.SetTime(logMessage);
+            var builder = new LogMessageBuilder(logMessage).SetId().SetTime();
 
-            Console.WriteLine(logMessage.Timestamp);
+            var message = builder.Build();
+            Console.WriteLine(message.Timestamp);
 
-            logMessageBusiness.Insert(logMessage);
+            logMessageBusiness.Insert(message);
 
             Assert.Pass();
-        }
-
-        /// <summary>
-        /// ≤‚ ‘∑¥–Ú¡–ªØ
-        /// </summary>
-        [Test]
-        public void TestDeserialize()
-        {
-            string json = "{\"level\":5, \"system\":\"sphinx\", \"module\":\"hermes-account\",\"action\":\"find user\",\"message\":\"find user by 152222222\"}";
-
-            var logMessage = logMessageBusiness.Deserialize(json);
-            logMessageBusiness.SetTime(logMessage);
-            Console.WriteLine(logMessage.ToString());
-
-            Assert.AreEqual(5, logMessage.Level);
-        }
+        }      
 
         [Test]
         public void TestSerialize()
@@ -70,12 +57,24 @@ namespace HermesLog.Test
                 System = "sphinx-log",
                 Module = "test",
                 Action = "test insert",
-                Message = "insert message"
+                Message = "insert message",
+                Timestamp = DateTime.Now
             };
 
-            logMessageBusiness.SetTime(message);
-
             Console.WriteLine(logMessageBusiness.Serialize(message));
+        }
+
+        [Test]
+        public void TestBuildMessage()
+        {
+            string json = "{\"level\":5, \"system\":\"sphinx\", \"module\":\"hermes-account\",\"action\":\"find user\",\"message\":\"find user by 152222222\"}";
+
+            ILogMessageBuilder logMessageBuilder = new LogMessageBuilder().SetJson(json).SetId().SetTime();
+
+            var message = logMessageBuilder.Build();
+            Console.WriteLine(message.ToString());
+
+            Assert.AreEqual(5, message.Level);
         }
     }
 }
