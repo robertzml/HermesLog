@@ -10,8 +10,10 @@ namespace Sphinx.App
     {
         static void Main(string[] args)
         {
-            //QueueProcess queueProcess = new QueueProcess();
-            //queueProcess.Run();
+            LoadSettings();
+
+            QueueProcess queueProcess = new QueueProcess();
+            queueProcess.Run();
 
             Console.WriteLine("Application exit.");
         }
@@ -27,6 +29,10 @@ namespace Sphinx.App
                .Build();
 
             AppSettings.MySqlConnection = config["mysql:connection"];
+            AppSettings.RabbitMQHostName = config["rabbitmq:hostName"];
+            AppSettings.RabbitMQPort = Convert.ToInt32(config["rabbitmq:port"]);
+            AppSettings.RabbitMQUserName = config["rabbitmq:userName"];
+            AppSettings.RabbitMQPassword = config["rabbitmq:password"];
         }
     }
 }

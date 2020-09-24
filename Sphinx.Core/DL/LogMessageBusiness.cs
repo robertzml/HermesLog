@@ -26,12 +26,12 @@ namespace Sphinx.Core.DL
                 IsAutoCloseConnection = true,
                 InitKeyType = InitKeyType.Attribute
             });
-           
+
             return db;
         }
         #endregion //Function
 
-        #region Method
+        #region Methodd
         /// <summary>
         /// 序列化对象
         /// </summary>
@@ -49,7 +49,7 @@ namespace Sphinx.Core.DL
         }
 
         /// <summary>
-        /// 添加日志记录
+        /// 保存日志记录
         /// </summary>
         /// <param name="logMessage"></param>
         public void Insert(LogMessage logMessage)
@@ -60,7 +60,7 @@ namespace Sphinx.Core.DL
 
                 db.Insertable(logMessage).ExecuteCommand();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }

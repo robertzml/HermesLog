@@ -9,6 +9,8 @@ using RabbitMQ.Client.Events;
 
 namespace Sphinx.App
 {
+    using Sphinx.Base.Common;
+    using Sphinx.Core.Builder;
     using Sphinx.Core.DL;
     using Sphinx.Core.Entity;
 
@@ -24,13 +26,11 @@ namespace Sphinx.App
         {
             IConnectionFactory factory = new ConnectionFactory()
             {
-                HostName = "192.168.1.121",
-                Port = 5672,
-                UserName = "admin",
-                Password = "admin"
+                HostName = AppSettings.RabbitMQHostName,
+                Port = AppSettings.RabbitMQPort,
+                UserName = AppSettings.RabbitMQUserName,
+                Password = AppSettings.RabbitMQPassword
             };
-
-            LogMessageBusiness logMessageBusiness = new LogMessageBusiness();
 
             using (var connection = factory.CreateConnection())
             {
@@ -38,27 +38,37 @@ namespace Sphinx.App
                 {
                     channel.QueueDeclare(queue: "LogQueue", durable: true, exclusive: false, autoDelete: false, arguments: null);
 
+                    channel.BasicQos(prefetchSize: 0, prefetchCount: 5, false);
+
                     var consumer = new EventingBasicConsumer(channel);
-                    consumer.Received += (sender, ea) =>
-                    {
-                        // get text
-                        var body = ea.Body.ToArray();
-                        var message = Encoding.UTF8.GetString(body);
+                    consumer.Received += ReceiveHandler;
 
-                        // insert log entity
-                        //var log = logMessageBusiness.Deserialize(message);
-                        //logMessageBusiness.SetTime(log);
-                        //logMessageBusiness.Insert(log);
-
-                        //Console.WriteLine(log.ToString());
-                    };
-                    
                     channel.BasicConsume(queue: "LogQueue", autoAck: true, consumer: consumer);
 
                     Console.WriteLine(" Press [enter] to exit.");
                     Console.ReadLine();
                 }
             }
+        }
+
+        /// <summary>
+        /// 队列接收服务
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void ReceiveHandler(object sender, BasicDeliverEventArgs e)
+        {
+            // get text
+            var body = e.Body.ToArray();
+            var json = Encoding.UTF8.GetString(body);
+
+            // insert log entity
+            var builder = new LogMessageBuilder(json).SetId().SetTime();
+            var log = builder.Build();
+
+            Console.WriteLine("message received, tag: {0}, msg:{1}", e.DeliveryTag, log.ToString());
+
+            ((EventingBasicConsumer)sender).Model.BasicAck(e.DeliveryTag, false);
         }
     }
 }
