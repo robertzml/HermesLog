@@ -8,13 +8,13 @@ WORKDIR /src
 COPY . .
 RUN dotnet restore
 
-WORKDIR "/src/HermesLog"
-RUN dotnet build "HermesLog.csproj" -c Release -o /app/build
+WORKDIR "/src/Sphinx.App"
+RUN dotnet build "Sphinx.App.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "HermesLog.csproj" -c Release -o /app/publish
+RUN dotnet publish "Sphinx.App.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "HermesLog.dll"]
+ENTRYPOINT ["dotnet", "Sphinx.App.dll"]

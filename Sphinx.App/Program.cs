@@ -10,6 +10,8 @@ namespace Sphinx.App
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Application Start.");
+
             LoadSettings();
 
             QueueProcess queueProcess = new QueueProcess();

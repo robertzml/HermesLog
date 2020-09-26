@@ -7,8 +7,13 @@ services:
     container_name: sphinx-1
     stdin_open: true
     tty: true
+    volumes:
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
     networks:
-      hermes-net:
+      artemis-net:
 networks:
-  hermes-net:
-    name: hermes-network
+  artemis-net:
+    name: artemis-network
