@@ -24,6 +24,8 @@ namespace Sphinx.App
         /// 队列名称
         /// </summary>
         private readonly string queueName = "LogQueue";
+
+        private LogMessageBusiness LogMessageBusiness = new LogMessageBusiness();
         #endregion //Field
 
         #region Method
@@ -66,15 +68,15 @@ namespace Sphinx.App
         /// <param name="e"></param>
         public void ReceiveHandler(object sender, BasicDeliverEventArgs e)
         {
-            // get text
+            // 解析日志内容
             var body = e.Body.ToArray();
-            var json = Encoding.UTF8.GetString(body);
-
-            // insert log entity
+            var json = Encoding.UTF8.GetString(body);           
             var builder = new LogMessageBuilder(json).SetId().SetTime();
             var log = builder.Build();
 
-            Console.WriteLine("message received, tag: {0}, msg:{1}", e.DeliveryTag, log.ToString());
+            // 插入到数据库
+            this.LogMessageBusiness.Insert(log);
+            // Console.WriteLine("message received, tag: {0}, msg:{1}", e.DeliveryTag, log.ToString());
 
             ((EventingBasicConsumer)sender).Model.BasicAck(e.DeliveryTag, false);
         }
