@@ -53,7 +53,7 @@ namespace Sphinx.Core.Builder
             var serializeOptions = new JsonSerializerOptions
             {
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNameCaseInsensitive = true
             };
 
             var log = JsonSerializer.Deserialize<LogMessage>(msg, serializeOptions);

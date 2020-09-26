@@ -46,7 +46,7 @@ namespace HermesLog.Test
             logMessageBusiness.Insert(message);
 
             Assert.Pass();
-        }      
+        }
 
         [Test]
         public void TestSerialize()
@@ -65,7 +65,20 @@ namespace HermesLog.Test
         }
 
         [Test]
-        public void TestBuildMessage()
+        public void TestDeserializeLarge()
+        {
+            string json = "{ \"Level\":4,\"System\":\"Glaucus\",\"Module\":\"main\",\"Action\":\"state\",\"Message\":\"time is 2020-09-26 14:15:24.9015384 +0800 CST m=+60.022818201.\"}";
+
+            ILogMessageBuilder logMessageBuilder = new LogMessageBuilder().SetJson(json).SetId().SetTime();
+
+            var message = logMessageBuilder.Build();
+            Console.WriteLine(message.ToString());
+
+            Assert.AreEqual(4, message.Level);
+        }
+
+        [Test]
+        public void TestDeserializeSmall()
         {
             string json = "{\"level\":5, \"system\":\"sphinx\", \"module\":\"hermes-account\",\"action\":\"find user\",\"message\":\"find user by 152222222\"}";
 

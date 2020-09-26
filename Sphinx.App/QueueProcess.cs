@@ -19,6 +19,14 @@ namespace Sphinx.App
     /// </summary>
     public class QueueProcess
     {
+        #region Field
+        /// <summary>
+        /// 队列名称
+        /// </summary>
+        private readonly string queueName = "LogQueue";
+        #endregion //Field
+
+        #region Method
         /// <summary>
         /// 启动队列监听
         /// </summary>
@@ -36,14 +44,14 @@ namespace Sphinx.App
             {
                 using (IModel channel = connection.CreateModel())
                 {
-                    channel.QueueDeclare(queue: "LogQueue", durable: true, exclusive: false, autoDelete: false, arguments: null);
+                    channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
 
                     channel.BasicQos(prefetchSize: 0, prefetchCount: 5, false);
 
                     var consumer = new EventingBasicConsumer(channel);
                     consumer.Received += ReceiveHandler;
 
-                    channel.BasicConsume(queue: "LogQueue", autoAck: true, consumer: consumer);
+                    channel.BasicConsume(queue: queueName, autoAck: false, consumer: consumer);
 
                     Console.WriteLine(" Press [enter] to exit.");
                     Console.ReadLine();
@@ -70,5 +78,6 @@ namespace Sphinx.App
 
             ((EventingBasicConsumer)sender).Model.BasicAck(e.DeliveryTag, false);
         }
+        #endregion //Method
     }
 }
