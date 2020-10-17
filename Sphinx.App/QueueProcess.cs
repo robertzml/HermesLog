@@ -13,6 +13,7 @@ namespace Sphinx.App
     using Sphinx.Core.Builder;
     using Sphinx.Core.DL;
     using Sphinx.Core.Entity;
+    using System.Threading;
 
     /// <summary>
     /// 队列处理类
@@ -48,7 +49,7 @@ namespace Sphinx.App
                 {
                     channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
 
-                    channel.BasicQos(prefetchSize: 0, prefetchCount: 5, false);
+                    channel.BasicQos(prefetchSize: 0, prefetchCount: 10, false);
 
                     var consumer = new EventingBasicConsumer(channel);
                     consumer.Received += ReceiveHandler;
@@ -68,6 +69,8 @@ namespace Sphinx.App
         /// <param name="e"></param>
         public void ReceiveHandler(object sender, BasicDeliverEventArgs e)
         {
+            Console.WriteLine($"received tag: {e.DeliveryTag}");
+
             // 解析日志内容
             var body = e.Body.ToArray();
             var json = Encoding.UTF8.GetString(body);           
@@ -75,10 +78,12 @@ namespace Sphinx.App
             var log = builder.Build();
 
             // 插入到数据库
-            this.LogMessageBusiness.Insert(log);
+            // this.LogMessageBusiness.Insert(log);
             // Console.WriteLine("message received, tag: {0}, msg:{1}", e.DeliveryTag, log.ToString());
 
             ((EventingBasicConsumer)sender).Model.BasicAck(e.DeliveryTag, false);
+          
+            Console.WriteLine($"received message: {log.System}-{log.Module}");
         }
         #endregion //Method
     }
