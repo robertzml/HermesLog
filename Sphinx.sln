@@ -1,21 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.30517.126
+VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphinx.App", "Sphinx.App\Sphinx.App.csproj", "{C9965F56-1953-4B77-AE47-0E4385FBFCA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphinx.App", "Sphinx.App\Sphinx.App.csproj", "{9BBF730B-B5A8-46BA-8779-6F8AC90E80C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphinx.Test", "Sphinx.Test\Sphinx.Test.csproj", "{C807FE5D-101E-484B-B866-A74B3F869AA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphinx.Base", "Sphinx.Base\Sphinx.Base.csproj", "{966B7C35-80E1-4F3B-96D1-FADD9A9C5734}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphinx.Core", "Sphinx.Core\Sphinx.Core.csproj", "{265BD74B-21E8-4892-98BD-3A6A676D335B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphinx.Core", "Sphinx.Core\Sphinx.Core.csproj", "{4C756209-FEE6-4F3E-81AD-799910896597}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{72503E3C-66BE-423C-9EB2-39CFD1A3C232}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphinx.Test", "Sphinx.Test\Sphinx.Test.csproj", "{22688791-CD70-471C-8272-C4228A10F99A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2E459A1A-12B9-4BB3-8469-A79861284DF0}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 		Dockerfile = Dockerfile
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphinx.Base", "Sphinx.Base\Sphinx.Base.csproj", "{DE2AC3AF-4D03-4C53-B8C9-AD1F6E934B33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,27 +23,27 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C9965F56-1953-4B77-AE47-0E4385FBFCA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9965F56-1953-4B77-AE47-0E4385FBFCA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9965F56-1953-4B77-AE47-0E4385FBFCA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9965F56-1953-4B77-AE47-0E4385FBFCA9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C807FE5D-101E-484B-B866-A74B3F869AA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C807FE5D-101E-484B-B866-A74B3F869AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C807FE5D-101E-484B-B866-A74B3F869AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C807FE5D-101E-484B-B866-A74B3F869AA4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{265BD74B-21E8-4892-98BD-3A6A676D335B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{265BD74B-21E8-4892-98BD-3A6A676D335B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{265BD74B-21E8-4892-98BD-3A6A676D335B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{265BD74B-21E8-4892-98BD-3A6A676D335B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DE2AC3AF-4D03-4C53-B8C9-AD1F6E934B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE2AC3AF-4D03-4C53-B8C9-AD1F6E934B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE2AC3AF-4D03-4C53-B8C9-AD1F6E934B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE2AC3AF-4D03-4C53-B8C9-AD1F6E934B33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BBF730B-B5A8-46BA-8779-6F8AC90E80C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BBF730B-B5A8-46BA-8779-6F8AC90E80C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BBF730B-B5A8-46BA-8779-6F8AC90E80C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BBF730B-B5A8-46BA-8779-6F8AC90E80C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{966B7C35-80E1-4F3B-96D1-FADD9A9C5734}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{966B7C35-80E1-4F3B-96D1-FADD9A9C5734}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{966B7C35-80E1-4F3B-96D1-FADD9A9C5734}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{966B7C35-80E1-4F3B-96D1-FADD9A9C5734}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C756209-FEE6-4F3E-81AD-799910896597}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C756209-FEE6-4F3E-81AD-799910896597}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C756209-FEE6-4F3E-81AD-799910896597}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C756209-FEE6-4F3E-81AD-799910896597}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22688791-CD70-471C-8272-C4228A10F99A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22688791-CD70-471C-8272-C4228A10F99A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22688791-CD70-471C-8272-C4228A10F99A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22688791-CD70-471C-8272-C4228A10F99A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7CAA4436-0B1E-44AA-BE18-4F290DD47E9C}
+		SolutionGuid = {26CF4701-61A7-41E6-AAAC-AC592E10EB1B}
 	EndGlobalSection
 EndGlobal
