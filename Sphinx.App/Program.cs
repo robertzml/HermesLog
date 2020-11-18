@@ -25,16 +25,16 @@ namespace Sphinx.App
         /// </summary>
         static void LoadSettings()
         {
-            //var config = new ConfigurationBuilder()
-            //   .SetBasePath(Directory.GetCurrentDirectory())
-            //   .AddJsonFile("appsettings.json", true, true)
-            //   .Build();
-
-            //AppSettings.MySqlConnection = config["mysql:connection"];
-            //AppSettings.RabbitMQHostName = config["rabbitmq:hostName"];
-            //AppSettings.RabbitMQPort = Convert.ToInt32(config["rabbitmq:port"]);
-            //AppSettings.RabbitMQUserName = config["rabbitmq:userName"];
-            //AppSettings.RabbitMQPassword = config["rabbitmq:password"];
+            var config = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json", true, true)
+               .Build();
+         
+            AppSettings.MySqlConnection = config["Mysql:Connection"];
+            AppSettings.RabbitMQHostName = config["RabbitMQ:HostName"];
+            AppSettings.RabbitMQPort = Convert.ToInt32(config["RabbitMQ:Port"]);
+            AppSettings.RabbitMQUserName = config["RabbitMQ:UserName"];
+            AppSettings.RabbitMQPassword = config["RabbitMQ:Password"];
         }
     }
 }
